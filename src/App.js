@@ -1,28 +1,46 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import data from './_DATA';
+import React, {Component} from 'react';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const Team = ({team, index, onDelete}) => (
+	<tr>
+		<td className='team'>{index + 1}. {team.name}</td>
+		<td><button onClick={onDelete}>Delete</button></td>
+	</tr>
+);
 
-export default App;
+export default class App extends Component {
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			teams: data
+		}
+	}
+	
+	onDelete = name => this.setState(prevState => ({teams: prevState.teams.filter(team => team.name !== name)}));
+	
+	render() {
+		const {teams} = this.state;
+		const renderedTeams = teams.map((team, index) => {
+			const {name} = team;
+			return (
+				<Team key={name} index={index} team={team} onDelete={() => this.onDelete(name)}/>
+			)
+		});
+		return (
+			<table className='wrapper'>
+				<thead>
+				<tr>
+					<th>
+						<h1>EPL Teams</h1>
+					</th>
+				</tr>
+				</thead>
+				<tbody className='teams'>
+				{renderedTeams}
+				</tbody>
+			</table>
+		)
+	}
+}

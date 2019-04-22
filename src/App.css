@@ -30,3 +30,32 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-color: #fefefe;
+  color: #222222;
+  font-family: 'Open Sans', sans-serif;
+  padding: 50px;
+}
+.wrapper {
+  max-width: 300px;
+}
+h1 {
+  font-size: 18px;
+  background-color: #ff015b;
+  color: #37003c;
+  padding: 7px;
+  text-align: center;
+}
+
+.teams {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team {
+  border-bottom: 1px #e8e7e7 solid;
+  text-align: left;
+  padding: 7px 0;
+}
